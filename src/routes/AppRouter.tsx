@@ -1,18 +1,24 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import Home from "../pages/Home"
 import { LoginPage } from "@/pages/auth/Login"
 import MainLayout from "@/layout/MainLayout"
+import { Dashboard } from "@/pages/Dashboard"
+import ProtectedRoute from "@/routes/ProtectedRoute"
+import Tickets from "@/pages/Tickets"
 
 const AppRouter = () => {
     return (
-        <BrowserRouter>
-            <MainLayout>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<LoginPage />} />
-                </Routes>
-            </MainLayout>
-        </BrowserRouter>
+        <Routes >
+            <Route element={<MainLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/auth/login" element={<LoginPage />} />
+            </Route>
+
+            <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/tickets" element={<Tickets />} />
+            </Route>
+        </Routes>
     )
 }
 

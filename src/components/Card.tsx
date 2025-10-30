@@ -9,8 +9,8 @@ const CardSec = () => {
                 <div className="grid md:grid-cols-3 gap-8">
                     <Card className="rounded-2xl shadow-lg border-0 hover:shadow-xl transition-shadow">
                         <CardContent className="p-8">
-                            <div className="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-6">
-                                <Ticket className="w-7 h-7 text-emerald-600" />
+                            <div className="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center mb-6">
+                                <Ticket className="w-7 h-7 text-sky-600" />
                             </div>
                             <h3 className="mb-4">Easy Ticket Management</h3>
                             <p className="text-muted-foreground">

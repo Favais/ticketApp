@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import axios from "axios"
+import { redirect } from "react-router-dom";
+import { useAppContext } from "@/context/appContext";
 
 interface LoginPageProps {
     onLogin: () => void;
@@ -11,11 +14,14 @@ interface LoginPageProps {
     onBackToHome: () => void;
 }
 
-export function LoginPage({ onLogin, onSwitchToSignup, onBackToHome }: LoginPageProps) {
+
+export function LoginPage({ }: LoginPageProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
+    const { setUser, navigate } = useAppContext()
     const validateForm = () => {
         const newErrors: { email?: string; password?: string } = {};
 
@@ -35,14 +41,27 @@ export function LoginPage({ onLogin, onSwitchToSignup, onBackToHome }: LoginPage
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (validateForm()) {
-            toast.success("Login successful! Welcome back.");
-            setTimeout(() => {
-                onLogin();
-            }, 500);
+            try {
+                const res = await axios.get('http://localhost:5000/user')
+                const user = res.data.find((user: any) => user.email === email);
+                if (user.password === password) {
+                    localStorage.setItem('ticketapp_session', JSON.stringify(user))
+                    setIsAuthenticated(true)
+                    setUser(user)
+                    navigate('/dashboard')
+                    toast.success("Login successful! Welcome back.");
+                } else {
+                    toast.error("Invalid email or password")
+                }
+
+            } catch (error) {
+                toast.error("Server error, please try again later.");
+                console.error(error);
+            }
         } else {
             toast.error("Please fix the errors in the form");
         }
@@ -57,7 +76,6 @@ export function LoginPage({ onLogin, onSwitchToSignup, onBackToHome }: LoginPage
             <Card className="w-full max-w-md rounded-2xl shadow-2xl border-0 relative z-10">
                 <CardHeader className="space-y-2 text-center pb-6">
                     <button
-                        onClick={onBackToHome}
                         className="text-2xl mb-2 hover:opacity-70 transition-opacity"
                     >
                         Ticlify
@@ -115,7 +133,6 @@ export function LoginPage({ onLogin, onSwitchToSignup, onBackToHome }: LoginPage
                         <p className="text-muted-foreground">
                             Don't have an account?{" "}
                             <button
-                                onClick={onSwitchToSignup}
                                 className="text-sky-600 hover:text-sky-700 hover:underline"
                             >
                                 Create account

@@ -4,7 +4,8 @@ import { Button } from "./ui/button"
 
 const Hero = () => {
     return (
-        <div className={`flex absolute min-h-screen overflow-hidden bg-linear-to-br from-[#0384c8] to-blue-600`}>
+        <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-[#0384c8] to-blue-600">
+            {/* Decorative Waves */}
             <svg
                 className="absolute w-full h-full inset-0"
                 viewBox="0 0 1440 500"
@@ -31,38 +32,43 @@ const Hero = () => {
                 />
             </svg>
 
+            {/* Decorative Circles */}
+            <CircularDecor className="z-0 absolute right-16 hidden md:block" height="100px" width="100px" />
+            <CircularDecor className="z-0 absolute right-14 top-7 hidden md:block" height="100px" width="100px" />
+            <CircularDecor className="z-0 absolute right-12 top-8 hidden md:block" height="100px" width="100px" />
 
-            {/* <svg
-                className="absolute left-0 right-0 bottom-0 w-full h-40 md:h-56 opacity-"
-                viewBox="0 0 1440 320"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-                focusable="false"
-            >
-                <path
-                    fill="#0384c8"          // color for area below the wave (page bg)
-                    d="M0,192L60,165.3C120,139,240,85,360,96C480,107,600,181,720,202.7C840,224,960,192,1080,181.3C1200,171,1320,181,1380,186.7L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-                    opacity="1"
-                />
-            </svg> */}
-            <CircularDecor className={'z-0 absolute right-16 '} height={'100px'} width={'100px'} />
-            <CircularDecor className={'z-0 absolute right-14 top-7 '} height={'100px'} width={'100px'} />
-            <CircularDecor className={'z-0 absolute right-12 top-8 '} height={'100px'} width={'100px'} />
-            <div className="grid grid-cols-2 p-8 items-center justify-center">
-                <div className=" flex flex-col gap-5 w-full p-10">
-                    <h1 className="text-7xl text-white ">Ticlify</h1>
-                    <p className="text-2xl text-white">Manage Tickets Effortlessly — Across Teams and Projects.</p>
-                    <div className="flex gap-6">
-                        <Link to={'/login'}>
-                            <Button size={"lg"} className="bg-skyblue">Get Started</Button>
+            {/* Content Section */}
+            <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                {/* Left Text */}
+                <div className="flex flex-col gap-6 text-center md:text-left">
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+                        Ticlify
+                    </h1>
+                    <p className="text-lg sm:text-xl md:text-2xl text-white/90 leading-relaxed">
+                        Manage Tickets Effortlessly — Across Teams and Projects.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <Link to="/login">
+                            <Button size="lg" className="bg-skyblue text-white hover:bg-sky-800">
+                                Get Started
+                            </Button>
                         </Link>
-                        <Button size={'lg'} variant={'outline'}>Login</Button>
+                        <Button size="lg" variant="outline" className="bg-white/20 text-white hover:bg-white/30">
+                            Login
+                        </Button>
                     </div>
                 </div>
-                <div className="relative">
-                    <div className="relative mx-auto max-w-md">
-                        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
-                            <img src="https://images.unsplash.com/photo-1593823004803-3aad2497ac44?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MzQ2fDB8MXxzZWFyY2h8MXx8d2F2eSUyMGJsdWUlMjBncmFkaWVudHxlbnwxfDB8fHwxNzYxMzg2MzM3fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Modern app interface" className="w-full h-64 object-cover rounded-2xl mb-4" loading="eager" />
+
+                {/* Right Image */}
+                <div className="relative flex justify-center md:justify-end">
+                    <div className="relative w-full max-w-sm sm:max-w-md">
+                        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 md:p-8 shadow-2xl">
+                            <img
+                                src="https://images.unsplash.com/photo-1593823004803-3aad2497ac44?auto=format&fit=crop&w=800&q=80"
+                                alt="Modern app interface"
+                                className="w-full h-56 sm:h-64 object-cover rounded-2xl mb-4"
+                                loading="eager"
+                            />
                             <div className="space-y-3">
                                 <div className="h-4 bg-white/20 rounded-full w-3/4"></div>
                                 <div className="h-4 bg-white/20 rounded-full w-1/2"></div>
@@ -70,12 +76,12 @@ const Hero = () => {
                             </div>
                         </div>
 
-                        <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/20 rounded-full blur-lg"></div>
-                        <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-white/15 rounded-full blur-md"></div>
+                        <div className="absolute -top-4 -right-4 w-16 h-16 md:w-20 md:h-20 bg-white/20 rounded-full blur-lg"></div>
+                        <div className="absolute -bottom-6 -left-6 w-12 h-12 md:w-16 md:h-16 bg-white/15 rounded-full blur-md"></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

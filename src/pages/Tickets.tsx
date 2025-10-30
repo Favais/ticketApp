@@ -23,7 +23,8 @@ type formData = {
 
 const Tickets = () => {
     const { tickets, addTicket, editTicket, deleteTicket } = useAppContext()
-    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm()
+    const { register, setValue, handleSubmit, watch, reset, formState: { errors } } = useForm()
+    const status = watch("status"); // Watch the current value
     const [selectedTicket, setSelectedTicket] = useState(null)
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -48,6 +49,7 @@ const Tickets = () => {
 
 
     const onEditSubmit = async (data: formData) => {
+        console.log(data);
 
         try {
             await editTicket(String(data.id), data)
@@ -93,7 +95,7 @@ const Tickets = () => {
 
     const getStatusBadge = (status: TicketStatus) => {
         const variants: Record<TicketStatus, { className: string; label: string }> = {
-            open: { className: "bg-emerald-100 text-emerald-700 hover:bg-emerald-100", label: "Open" },
+            open: { className: "bg-sky-100 text-sky-700 hover:bg-sky-100", label: "Open" },
             in_progress: { className: "bg-amber-100 text-amber-700 hover:bg-amber-100", label: "In Progress" },
             closed: { className: "bg-slate-100 text-slate-700 hover:bg-slate-100", label: "Closed" },
         };
@@ -116,7 +118,7 @@ const Tickets = () => {
                     </div>
                     <Button
                         onClick={openCreateModal}
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl"
+                        className="bg-sky-600 hover:bg-sky-700 text-white rounded-xl"
                     >
                         <Plus className="w-4 h-4 mr-2" />
                         Create New Ticket
@@ -231,6 +233,8 @@ const Tickets = () => {
                             <div className="space-y-2">
                                 <Label htmlFor="status">Status</Label>
                                 <Select
+                                    onValueChange={(value) => setValue("status", value)}
+                                    value={status}
                                     {...register('status', { required: true })}
                                 >
                                     <SelectTrigger className="rounded-xl">
@@ -261,7 +265,7 @@ const Tickets = () => {
                                 <Button
                                     type="button"
                                     onClick={isCreateModalOpen ? handleSubmit(onCreateSubmit) : handleSubmit(onEditSubmit)}
-                                    className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl"
+                                    className="flex-1 bg-sky-600 hover:bg-sky-700 text-white rounded-xl"
                                 >
                                     {isCreateModalOpen ? "Create Ticket" : "Save Changes"}
                                 </Button>
