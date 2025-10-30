@@ -32,7 +32,7 @@ interface AppWrapperProps {
 export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     const [user, setUser] = useState<any>(null);
     const [tickets, setTickets] = useState<any[]>([]);
-    const backendUrl = "http://localhost:5000";
+    const backendUrl = "https://ticketapp-production-7ac6.up.railway.app";
     const navigate = useNavigate();
 
     const getTickets = async () => {

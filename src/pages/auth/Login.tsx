@@ -44,7 +44,7 @@ export function LoginPage({ }: LoginPageProps) {
 
         if (validateForm()) {
             try {
-                const res = await axios.get('http://localhost:5000/user')
+                const res = await axios.get('https://ticketapp-production-7ac6.up.railway.app/users');
                 const user = res.data.find((user: any) => user.email === email);
                 if (user.password === password) {
                     localStorage.setItem('ticketapp_session', JSON.stringify(user))
