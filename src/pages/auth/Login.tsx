@@ -5,7 +5,6 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import axios from "axios"
-import { redirect } from "react-router-dom";
 import { useAppContext } from "@/context/appContext";
 
 interface LoginPageProps {
@@ -18,7 +17,6 @@ interface LoginPageProps {
 export function LoginPage({ }: LoginPageProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
     const { setUser, navigate } = useAppContext()
@@ -50,7 +48,6 @@ export function LoginPage({ }: LoginPageProps) {
                 const user = res.data.find((user: any) => user.email === email);
                 if (user.password === password) {
                     localStorage.setItem('ticketapp_session', JSON.stringify(user))
-                    setIsAuthenticated(true)
                     setUser(user)
                     navigate('/dashboard')
                     toast.success("Login successful! Welcome back.");

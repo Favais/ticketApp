@@ -26,7 +26,6 @@ const Tickets = () => {
     const { tickets, addTicket, editTicket, deleteTicket } = useAppContext()
     const { register, setValue, handleSubmit, watch, reset, formState: { errors } } = useForm<formData>()
     const status = watch("status"); // Watch the current value
-    const [selectedTicket, setSelectedTicket] = useState(null)
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -56,7 +55,6 @@ const Tickets = () => {
             await editTicket(String(data.id), data)
             // close modal and reset form
             setIsEditModalOpen(false)
-            setSelectedTicket(null)
             reset({
                 title: "",
                 description: "",

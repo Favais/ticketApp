@@ -1,5 +1,5 @@
 import { useAppContext } from '@/context/appContext';
-import { LogOut, Menu, Ticket, X } from 'lucide-react';
+import { LogOut, Menu, X } from 'lucide-react';
 import logo from '@/assets/logo.png'
 import { Button } from '../ui/button';
 import { Link, useLocation } from 'react-router-dom';
