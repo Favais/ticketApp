@@ -1,4 +1,3 @@
-import DashHeader from "../components/dashboard/DashHeader";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAppContext } from "@/context/appContext";
 import { Ticket, CheckCircle2, Clock, XCircle } from "lucide-react";

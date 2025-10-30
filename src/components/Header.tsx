@@ -18,9 +18,8 @@ const Header = () => {
             <nav className="hidden md:flex border rounded-b-full py-3 px-10">
                 <ul className="flex gap-12 text-gray-700 font-medium">
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/services">Services</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
+                    <li><Link to="/dashboard">Dashboard</Link></li>
+                    <li><Link to="/tickets">Tickets</Link></li>
                 </ul>
             </nav>
 
@@ -49,9 +48,8 @@ const Header = () => {
                 <div className="absolute top-16 left-0 w-full bg-white shadow-md border-t py-5 flex flex-col items-center gap-5 md:hidden">
                     <ul className="flex flex-col items-center gap-4 text-gray-700 font-medium">
                         <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
-                        <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
-                        <li><Link to="/services" onClick={() => setMenuOpen(false)}>Services</Link></li>
-                        <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
+                        <li><Link to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link></li>
+                        <li><Link to="/tickets" onClick={() => setMenuOpen(false)}>Tickets</Link></li>
                     </ul>
                     <div className="flex flex-col gap-3 mt-4">
                         <Link to="/auth/login">

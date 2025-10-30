@@ -4,7 +4,7 @@ import React, {
     useContext,
     useEffect,
     useState,
-    ReactNode,
+    type ReactNode,
 } from "react";
 import { useNavigate } from "react-router-dom";
 

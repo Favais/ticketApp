@@ -6,12 +6,22 @@ import { Dashboard } from "@/pages/Dashboard"
 import ProtectedRoute from "@/routes/ProtectedRoute"
 import Tickets from "@/pages/Tickets"
 
+
 const AppRouter = () => {
     return (
         <Routes >
             <Route element={<MainLayout />}>
                 <Route path="/" element={<Home />} />
-                <Route path="/auth/login" element={<LoginPage />} />
+                <Route
+                    path="/auth/login"
+                    element={
+                        <LoginPage
+                            onLogin={() => { }}
+                            onSwitchToSignup={() => { }}
+                            onBackToHome={() => { }}
+                        />
+                    }
+                />
             </Route>
 
             <Route element={<ProtectedRoute />}>

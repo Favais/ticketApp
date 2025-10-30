@@ -10,20 +10,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAppContext } from "@/context/appContext";
 import { Edit, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form"
+import { useForm, } from "react-hook-form"
 import { toast } from "sonner";
 
 export type TicketStatus = "open" | "in_progress" | "closed";
 
 type formData = {
-    title: "",
-    description: "",
+    id: string,
+    title: string,
+    description: string,
     status: "open" | "in_progress" | "closed"
 }
 
 const Tickets = () => {
     const { tickets, addTicket, editTicket, deleteTicket } = useAppContext()
-    const { register, setValue, handleSubmit, watch, reset, formState: { errors } } = useForm()
+    const { register, setValue, handleSubmit, watch, reset, formState: { errors } } = useForm<formData>()
     const status = watch("status"); // Watch the current value
     const [selectedTicket, setSelectedTicket] = useState(null)
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -40,7 +41,7 @@ const Tickets = () => {
         setIsCreateModalOpen(true)
     }
 
-    const openEditModal = (ticket: FormData) => {
+    const openEditModal = (ticket: formData) => {
         setIsEditModalOpen(true)
         reset(ticket)
 
@@ -69,10 +70,9 @@ const Tickets = () => {
     const onCreateSubmit = (data: formData) => {
 
         const ticket = {
-            id: String(tickets.length + 1),
             ...data,
+            id: String(tickets.length + 1),
             createdAt: new Date().toISOString()
-
         }
         addTicket(ticket)
         reset({
@@ -83,7 +83,7 @@ const Tickets = () => {
         setIsCreateModalOpen(false)
     }
 
-    const onDeleteConfirm = (ticketToDelete) => {
+    const onDeleteConfirm = (ticketToDelete: string | null) => {
         if (!ticketToDelete) return;
         deleteTicket(String(ticketToDelete))
 
@@ -233,7 +233,7 @@ const Tickets = () => {
                             <div className="space-y-2">
                                 <Label htmlFor="status">Status</Label>
                                 <Select
-                                    onValueChange={(value) => setValue("status", value)}
+                                    onValueChange={(value) => setValue("status", value as TicketStatus)}
                                     value={status}
                                     {...register('status', { required: true })}
                                 >
@@ -286,7 +286,7 @@ const Tickets = () => {
                         <AlertDialogFooter>
                             <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
                             <AlertDialogAction
-                                onClick={() => deleteTicket(ticketToDelete)}
+                                onClick={() => onDeleteConfirm(ticketToDelete)}
                                 className="bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-xl"
                             >
                                 Delete
